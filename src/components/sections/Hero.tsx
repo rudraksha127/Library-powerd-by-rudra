@@ -78,7 +78,10 @@ export function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
         >
-          <button className="glass-card px-8 py-3 font-body text-sm tracking-widest uppercase hover:bg-white/10 transition-colors duration-300">
+          <button 
+            onClick={() => document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' })}
+            className="glass-card px-8 py-3 font-body text-sm tracking-widest uppercase hover:bg-white/10 transition-colors duration-300 cursor-pointer"
+          >
             Begin Journey
           </button>
         </motion.div>

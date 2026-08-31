@@ -1,13 +1,25 @@
 "use client";
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Play, Pause } from "lucide-react";
 
 export function FloatingNav() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/audio/bgm.mp3');
+    audioRef.current.loop = true;
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -19,8 +31,14 @@ export function FloatingNav() {
   });
 
   const toggleMusic = () => {
+    if (!audioRef.current) return;
+    
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(e => console.log("Audio play failed:", e));
+    }
     setIsPlaying(!isPlaying);
-    // Audio logic will be added here later
   };
 
   return (

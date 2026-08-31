@@ -56,7 +56,13 @@ export function StoryScroll() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 flex flex-col gap-32 md:gap-64 px-4 overflow-hidden">
+    <section id="story" ref={containerRef} className="relative w-full py-32 flex flex-col gap-32 md:gap-64 px-4 overflow-hidden">
+      
+      {/* Glowing Vertical Timeline */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-white/5 md:block hidden">
+        <div className="w-full h-[20vh] bg-gradient-to-b from-transparent via-[var(--color-champagne-gold)] to-transparent opacity-50 blur-[2px]" />
+      </div>
+
       {chapters.map((chapter, i) => (
         <div 
           key={chapter.id} 
