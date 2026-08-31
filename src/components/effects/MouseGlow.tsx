@@ -19,7 +19,7 @@ export function MouseGlow() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, []);
+  }, [reduceMotion]);
 
   if (reduceMotion) return null;
 

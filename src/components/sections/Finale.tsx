@@ -73,7 +73,7 @@ export function Finale() {
                 transition={{ delay: 0.4, duration: 1.2 }}
                 className="font-display text-2xl sm:text-3xl text-[var(--color-blush-pink)]/90 leading-relaxed mb-6 font-normal italic"
               >
-                "Kuch log bina kuch kahe bhi<br />ek gehra asar chhod jaate hain."
+                &ldquo;Kuch log bina kuch kahe bhi<br />ek gehra asar chhod jaate hain.&rdquo;
               </motion.div>
               
               <motion.p

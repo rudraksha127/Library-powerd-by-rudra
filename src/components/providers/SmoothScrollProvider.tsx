@@ -4,12 +4,12 @@ import { ReactLenis } from "lenis/react";
 import { useEffect, useState } from "react";
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduceMotion(mediaQuery.matches);
-
     const onChange = (event: MediaQueryListEvent) => setReduceMotion(event.matches);
     mediaQuery.addEventListener("change", onChange);
     return () => mediaQuery.removeEventListener("change", onChange);
