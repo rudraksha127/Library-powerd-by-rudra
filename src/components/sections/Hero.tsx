@@ -29,7 +29,7 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="section-shell min-h-screen flex flex-col items-center justify-center"
     >
       {/* Ambient background — very restrained, two soft orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -92,10 +92,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.3 }}
         >
-          <Link href="/story">
-            <span className="inline-block px-8 py-3.5 rounded-full border border-white/[0.08] bg-white/[0.02] font-body text-[10px] tracking-[0.3em] uppercase text-white/60 hover:text-white/90 hover:border-[var(--color-champagne-gold)]/30 hover:bg-white/[0.04] transition-all duration-700 cursor-pointer">
+          <Link
+            href="/story"
+            className="focus-ring inline-block px-8 py-3.5 rounded-full border border-white/[0.08] bg-white/[0.02] font-body text-[10px] tracking-[0.3em] uppercase text-white/60 hover:text-white/90 hover:border-[var(--color-champagne-gold)]/30 hover:bg-white/[0.04] transition-all duration-700"
+          >
               Begin
-            </span>
           </Link>
         </motion.div>
       </div>

@@ -70,11 +70,39 @@
 }
 
 @layer utilities {
+  .section-shell {
+    @apply relative w-full px-6 sm:px-8 overflow-hidden;
+  }
+
+  .section-header {
+    @apply text-center max-w-2xl mx-auto;
+  }
+
+  .section-eyebrow {
+    @apply font-body text-[10px] tracking-[0.4em] text-[var(--color-champagne-gold)]/55 uppercase mb-4 block;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl md:text-5xl text-white/90 font-normal leading-tight;
+  }
+
+  .section-subtext {
+    @apply font-body text-[13px] sm:text-sm text-white/40 leading-relaxed font-light;
+  }
+
   .glass-surface {
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(40px) saturate(1.2);
     -webkit-backdrop-filter: blur(40px) saturate(1.2);
     border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .interactive-pill {
+    @apply rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] transition-all;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-champagne-gold)]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-deep-night)];
   }
 
   .text-glow {
@@ -87,5 +115,20 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
