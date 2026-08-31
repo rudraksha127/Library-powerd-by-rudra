@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { LoadingExperience } from "@/components/sections/LoadingExperience";
+import { Intro } from "@/components/sections/Intro";
 import { Hero } from "@/components/sections/Hero";
 import { StoryScroll } from "@/components/sections/StoryScroll";
 import { Gallery } from "@/components/sections/Gallery";
@@ -27,6 +28,7 @@ export default function Home() {
       >
         <MouseGlow />
         <FloatingNav />
+        <Intro />
         <Hero />
         <StoryScroll />
         <Gallery />
