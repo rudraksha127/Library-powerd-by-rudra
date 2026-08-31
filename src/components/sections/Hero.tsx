@@ -33,10 +33,23 @@ export function Hero() {
       className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background with subtle glow */}
-      <div className="absolute inset-0 bg-[var(--color-deep-night)]">
-        {/* We'll add particles/Canvas here later */}
-        <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--color-lavender-mist)] opacity-10 blur-[120px] mix-blend-screen" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--color-blush-pink)] opacity-10 blur-[120px] mix-blend-screen" />
+      <div className="absolute inset-0 bg-[var(--color-deep-night)] overflow-hidden">
+        {/* Animated Orbs */}
+        <motion.div 
+          animate={{ x: [0, 50, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[var(--color-lavender-mist)] opacity-10 blur-[120px] mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ x: [0, -40, 0], y: [0, -50, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-[var(--color-blush-pink)] opacity-[0.08] blur-[150px] mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ x: [0, 30, 0], y: [0, -30, 0], opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[20%] left-[20%] w-[40vw] h-[40vw] rounded-full bg-[var(--color-champagne-gold)] blur-[100px] mix-blend-screen" 
+        />
       </div>
 
       {/* Main Content */}
