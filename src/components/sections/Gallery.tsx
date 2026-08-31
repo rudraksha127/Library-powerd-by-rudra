@@ -5,74 +5,55 @@ import { motion, AnimatePresence } from "framer-motion";
 import galleryData from "@/data/gallery.json";
 
 export function Gallery() {
-  const [filter, setFilter] = useState("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const categories = ["All", ...Array.from(new Set(galleryData.map(item => item.category)))];
-  
-  const filteredData = filter === "All" 
-    ? galleryData 
-    : galleryData.filter(item => item.category === filter);
-
   return (
-    <section className="relative w-full py-20 px-4 md:px-12 max-w-7xl mx-auto">
-      <div className="flex flex-col items-center mb-16 text-center">
-        <h2 className="font-display text-4xl text-[var(--color-champagne-gold)] mb-4">Captured Moments</h2>
-        <p className="font-body text-white/50 max-w-lg">
-          A collection of fragments, light, and elegance.
+    <section className="relative w-full py-32 px-6 sm:px-8 overflow-hidden">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="text-center max-w-2xl mx-auto mb-20"
+      >
+        <span className="font-body text-[10px] tracking-[0.4em] text-[var(--color-champagne-gold)]/50 uppercase mb-4 block">
+          Gallery
+        </span>
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white/85 font-normal leading-tight mb-4">
+          Captured Moments
+        </h2>
+        <p className="font-body text-[13px] text-white/30 max-w-md mx-auto leading-relaxed font-light">
+          Fragments of light and things worth remembering.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Filters */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`px-4 py-2 rounded-full font-body text-xs tracking-widest uppercase transition-all duration-300 ${
-              filter === cat 
-                ? "bg-[var(--color-blush-pink)] text-[var(--color-deep-night)]" 
-                : "bg-white/5 text-white/60 hover:bg-white/10"
-            }`}
+      {/* Grid — clean, uniform, no tilts */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        {galleryData.map((item, i) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.08 }}
+            className="group cursor-pointer"
+            onClick={() => setSelectedImage(item.id)}
           >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* Masonry Grid */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-        <AnimatePresence>
-          {filteredData.map((item) => (
-            <motion.div
-              key={item.id}
-              layoutId={`image-${item.id}`}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.4 }}
-              className="relative break-inside-avoid group cursor-pointer"
-              onClick={() => setSelectedImage(item.id)}
-            >
-              <div 
-                className="glass-card overflow-hidden transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-[0_10px_40px_rgba(232,160,191,0.2)]"
-                style={{ transform: `rotate(${item.tilt}deg)` }}
-              >
-                <div className="aspect-[3/4] bg-white/5 relative flex items-center justify-center overflow-hidden">
-                  <img 
-                    src={item.url} 
-                    alt={item.caption}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-110 mix-blend-lighten"
-                  />
-                </div>
-                <div className="p-4 bg-[var(--color-warm-black)]/80 backdrop-blur-sm">
-                  <p className="font-body text-sm text-white/70">{item.caption}</p>
-                </div>
+            <div className="aspect-[3/4] rounded-xl overflow-hidden relative">
+              <img
+                src={item.url}
+                alt={item.caption}
+                className="w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.04]"
+                style={{ filter: "brightness(0.75) contrast(1.05) saturate(0.85)" }}
+              />
+              {/* Hover overlay with caption */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5">
+                <p className="font-body text-[12px] text-white/80 tracking-wide font-light">{item.caption}</p>
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
       {/* Lightbox */}
@@ -82,25 +63,29 @@ export function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--color-deep-night)]/95 backdrop-blur-xl p-4 md:p-12"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-6 md:p-12"
             onClick={() => setSelectedImage(null)}
           >
             <motion.div
-              layoutId={`image-${selectedImage}`}
-              className="relative w-full max-w-4xl aspect-[3/4] md:aspect-auto md:h-[80vh] glass-card flex items-center justify-center overflow-hidden"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-3xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={galleryData.find(img => img.id === selectedImage)?.url} 
-                alt="Fullscreen view"
-                className="w-full h-full object-contain"
+              <img
+                src={galleryData.find(img => img.id === selectedImage)?.url}
+                alt=""
+                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
               />
-              
-              <button 
+
+              <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer text-white/60 text-xs"
               >
-                <span className="text-white">✕</span>
+                ✕
               </button>
             </motion.div>
           </motion.div>

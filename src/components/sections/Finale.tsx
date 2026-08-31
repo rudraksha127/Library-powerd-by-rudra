@@ -2,69 +2,113 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Heart } from "lucide-react";
+import { Mail, ArrowUp } from "lucide-react";
 
 export function Finale() {
   const [envelopeOpen, setEnvelopeOpen] = useState(false);
 
   return (
-    <section className="relative w-full min-h-screen py-32 flex flex-col items-center justify-center overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[var(--color-champagne-gold)] rounded-full blur-[150px] opacity-10 mix-blend-screen pointer-events-none" />
+    <section id="finale" className="relative w-full min-h-screen py-36 flex flex-col items-center justify-center overflow-hidden">
+      {/* Background Aura */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55vw] h-[55vw] bg-[var(--color-champagne-gold)] rounded-full blur-[160px] mix-blend-screen pointer-events-none"
+        animate={{ opacity: envelopeOpen ? 0.12 : 0.04 }}
+        transition={{ duration: 1.8 }}
+      />
 
-      {/* Scrapbook Intro */}
-      <div className="mb-32 text-center px-4">
-        <h2 className="font-display text-4xl text-[var(--color-champagne-gold)] mb-6">A final note</h2>
-        <p className="font-body text-white/50 max-w-md mx-auto leading-relaxed">
-          Some aesthetics just inspire creativity. Thank you for being the kind of person who makes the world more beautiful just by being in it.
+      {/* Epilogue Header */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2 }}
+        className="mb-20 text-center px-6"
+      >
+        <span className="font-body text-[10px] tracking-[0.35em] text-[var(--color-champagne-gold)]/70 uppercase mb-3 block">
+          Epilogue
+        </span>
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white/90 mb-4 font-normal">
+          A Quiet Note
+        </h2>
+        <p className="font-body text-xs sm:text-sm text-white/35 max-w-sm mx-auto leading-relaxed font-light">
+          For the grace that leaves a lasting impression.
         </p>
-      </div>
+      </motion.div>
 
-      {/* Envelope Interactive */}
+      {/* Envelope Component */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl mx-auto px-4">
-        {!envelopeOpen ? (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setEnvelopeOpen(true)}
-            className="group relative w-64 h-48 glass-card flex flex-col items-center justify-center gap-4 cursor-pointer overflow-hidden transition-shadow hover:shadow-[0_0_40px_rgba(212,165,116,0.3)]"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-            <Mail className="w-10 h-10 text-[var(--color-champagne-gold)] opacity-80 group-hover:scale-110 transition-transform duration-500" />
-            <span className="font-body text-xs tracking-[0.2em] uppercase text-[var(--color-champagne-gold)] opacity-80">
-              Tap to open
-            </span>
-          </motion.button>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative w-full glass-card p-8 md:p-16 text-center"
-          >
-            {/* Letter Content */}
-            <div className="font-handwritten text-3xl md:text-5xl text-[var(--color-blush-pink)] leading-relaxed mb-12">
-              <p className="mb-6">I built this because your presence — even from afar — inspires something creative in me.</p>
-              <p>I hope this makes you smile.</p>
-            </div>
-            
-            <div className="flex flex-col items-center gap-4">
-              <span className="font-display text-xl text-white/80">— Rudraksh</span>
-              <Heart className="w-4 h-4 text-[var(--color-champagne-gold)] opacity-50" />
-            </div>
-
-            {/* Replay Button */}
+        <AnimatePresence mode="wait">
+          {!envelopeOpen ? (
             <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="mt-16 px-6 py-2 rounded-full border border-white/10 text-white/50 font-body text-xs uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all duration-300"
+              key="closed"
+              whileHover={{ scale: 1.03, y: -4 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => setEnvelopeOpen(true)}
+              className="group relative w-72 h-48 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl flex flex-col items-center justify-center gap-4 cursor-pointer hover:border-[var(--color-champagne-gold)]/40 hover:shadow-[0_0_45px_rgba(212,165,116,0.12)] transition-all duration-700"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.85 }}
             >
-              Replay Journey
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Mail className="w-9 h-9 text-[var(--color-champagne-gold)] opacity-70 group-hover:opacity-95 transition-opacity duration-500" />
+              </motion.div>
+              <span className="font-body text-[10px] tracking-[0.3em] uppercase text-white/40 group-hover:text-white/70 transition-colors">
+                Open Letter
+              </span>
             </motion.button>
-          </motion.div>
-        )}
+          ) : (
+            <motion.div
+              key="open"
+              initial={{ opacity: 0, y: 35 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative w-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-8 sm:p-14 text-center shadow-2xl"
+            >
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 1.2 }}
+                className="font-display text-2xl sm:text-3xl text-[var(--color-blush-pink)]/90 leading-relaxed mb-6 font-normal italic"
+              >
+                "Kuch log bina kuch kahe bhi<br />ek gehra asar chhod jaate hain."
+              </motion.div>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 1 }}
+                className="font-body text-xs sm:text-sm text-white/45 max-w-md mx-auto leading-relaxed mb-10 font-light"
+              >
+                May your days always carry the same warmth and elegance that you bring into the world.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2, duration: 0.8 }}
+                className="flex items-center justify-center gap-3"
+              >
+                <div className="h-[1px] w-10 bg-white/15" />
+                <span className="font-display text-base tracking-widest text-white/70 font-light">— R</span>
+                <div className="h-[1px] w-10 bg-white/15" />
+              </motion.div>
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.6 }}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                title="Back to top"
+              >
+                <ArrowUp className="w-3.5 h-3.5 text-white/50" />
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

@@ -2,32 +2,32 @@
   {
     "id": 1,
     "title": "A Certain Grace",
-    "quote": "Some people don't just walk into a room, they change its weather.",
-    "caption": "Noticed from afar.",
+    "quote": "Some people walk into your world quietly, and suddenly everything feels like poetry.",
+    "caption": "— on first impressions",
     "alignment": "left",
     "image": "https://images.unsplash.com/photo-1518972559570-7cc1309f3229?q=80&w=2070&auto=format&fit=crop"
   },
   {
     "id": 2,
     "title": "Quiet Elegance",
-    "quote": "There is a kind of beauty that doesn't need to announce itself.",
-    "caption": "The subtle moments.",
+    "quote": "Kuch cheezein samjhaane ki zarurat nahi hoti — unhe mehsoos karna kaafi hota hai.",
+    "caption": "— on silence",
     "alignment": "right",
     "image": "https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=1888&auto=format&fit=crop"
   },
   {
     "id": 3,
-    "title": "Radiance",
-    "quote": "You wear light like it was made specifically for you.",
-    "caption": "A gentle glow.",
+    "title": "Sunlight & Shadows",
+    "quote": "There are people who carry warmth like sunlight through curtains — effortless, soft, unforgettable.",
+    "caption": "— on beauty",
     "alignment": "center",
     "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1887&auto=format&fit=crop"
   },
   {
     "id": 4,
     "title": "The Art of Being",
-    "quote": "Just existing, effortlessly.",
-    "caption": "Candid beauty.",
+    "quote": "Woh log jo bina koshish ke khoobsurat lagte hain — unhe dekhna khud mein ek sukoon hai.",
+    "caption": "— on admiration",
     "alignment": "left",
     "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop"
   }
