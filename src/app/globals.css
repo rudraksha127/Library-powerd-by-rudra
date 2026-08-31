@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-night: #0a0a0f;
+  --color-warm-black: #1a1a2e;
+  --color-blush-pink: #e8a0bf;
+  --color-champagne-gold: #d4a574;
+  --color-lavender-mist: #c8a2c8;
+  --color-ivory-cream: #faf5ef;
+  --color-soft-rose: #f5c6d0;
+  --color-sparkle-white: #fffaf0;
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-inter);
+  --font-handwritten: var(--font-caveat);
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  :root {
+    --background: var(--color-deep-night);
+    --foreground: var(--color-ivory-cream);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(232,160,191,0.1)];
+  }
+  
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(232,160,191,0.1)] rounded-2xl;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px rgba(212, 165, 116, 0.4);
+  }
+}

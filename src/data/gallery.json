@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "url": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?q=80&w=1887&auto=format&fit=crop",
+    "category": "Portraits",
+    "caption": "Captured in the moment.",
+    "tilt": -2
+  },
+  {
+    "id": 2,
+    "url": "https://images.unsplash.com/photo-1517462964-21fdcec3f25b?q=80&w=1887&auto=format&fit=crop",
+    "category": "Travel",
+    "caption": "Wanderlust.",
+    "tilt": 1
+  },
+  {
+    "id": 3,
+    "url": "https://images.unsplash.com/photo-1522228115018-d838bcce5c3a?q=80&w=1887&auto=format&fit=crop",
+    "category": "Candid",
+    "caption": "Effortlessly elegant.",
+    "tilt": 3
+  },
+  {
+    "id": 4,
+    "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop",
+    "category": "Portraits",
+    "caption": "Eyes that speak.",
+    "tilt": -1
+  },
+  {
+    "id": 5,
+    "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop",
+    "category": "Aesthetic",
+    "caption": "Just vibes.",
+    "tilt": 2
+  }
+]
