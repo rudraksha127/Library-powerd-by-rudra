@@ -118,7 +118,7 @@ export function LikeComment({ pageId }: Props) {
         <motion.button
           whileTap={{ scale: 0.85 }}
           onClick={toggleLike}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] transition-all cursor-pointer"
+          className="focus-ring interactive-pill flex items-center gap-2 px-5 py-2.5"
         >
           <Heart 
             className={`w-4 h-4 transition-colors ${liked ? "fill-[var(--color-blush-pink)] text-[var(--color-blush-pink)]" : "text-white/50"}`} 
@@ -130,7 +130,9 @@ export function LikeComment({ pageId }: Props) {
 
         <button
           onClick={() => setShowComments(!showComments)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] transition-all cursor-pointer"
+          className="focus-ring interactive-pill flex items-center gap-2 px-5 py-2.5"
+          aria-expanded={showComments}
+          aria-controls={`comments-panel-${pageId}`}
         >
           <MessageCircle className="w-4 h-4 text-white/50" />
           <span className="font-body text-xs tracking-widest uppercase text-white/50">
@@ -148,6 +150,7 @@ export function LikeComment({ pageId }: Props) {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4 }}
             className="mt-6 overflow-hidden"
+            id={`comments-panel-${pageId}`}
           >
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-5">
               {/* Comment List */}
@@ -175,11 +178,12 @@ export function LikeComment({ pageId }: Props) {
                   onChange={(e) => setNewComment(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addComment()}
                   placeholder="Write something..."
-                  className="flex-1 bg-white/[0.04] border border-white/10 rounded-full px-4 py-2.5 font-body text-sm text-white/80 placeholder:text-white/25 outline-none focus:border-[var(--color-champagne-gold)]/40 transition-colors"
+                  className="focus-ring flex-1 bg-white/[0.04] border border-white/10 rounded-full px-4 py-2.5 font-body text-sm text-white/80 placeholder:text-white/25 transition-colors"
                 />
                 <button
                   onClick={addComment}
-                  className="w-10 h-10 rounded-full bg-[var(--color-champagne-gold)]/20 flex items-center justify-center hover:bg-[var(--color-champagne-gold)]/30 transition-colors cursor-pointer"
+                  className="focus-ring w-10 h-10 rounded-full bg-[var(--color-champagne-gold)]/20 flex items-center justify-center hover:bg-[var(--color-champagne-gold)]/30 transition-colors"
+                  aria-label="Send comment"
                 >
                   <Send className="w-3.5 h-3.5 text-[var(--color-champagne-gold)]" />
                 </button>

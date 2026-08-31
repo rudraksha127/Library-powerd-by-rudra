@@ -51,7 +51,7 @@ export function StoryScroll() {
   }, []);
 
   return (
-    <section className="relative w-full pt-32 pb-40 flex flex-col gap-48 md:gap-64 px-6 sm:px-8 overflow-hidden">
+    <section className="section-shell pt-32 pb-40 flex flex-col gap-48 md:gap-64">
 
       {/* Section header */}
       <motion.div
@@ -59,12 +59,12 @@ export function StoryScroll() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="text-center max-w-2xl mx-auto"
+        className="section-header"
       >
-        <span className="font-body text-[10px] tracking-[0.4em] text-[var(--color-champagne-gold)]/50 uppercase mb-4 block">
+        <span className="section-eyebrow">
           Chapters
         </span>
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white/85 font-normal leading-tight">
+        <h2 className="section-title">
           Stories Worth Telling
         </h2>
       </motion.div>

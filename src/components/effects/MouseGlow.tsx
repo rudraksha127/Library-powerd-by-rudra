@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export function MouseGlow() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reduceMotion) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -16,7 +19,9 @@ export function MouseGlow() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, []);
+  }, [reduceMotion]);
+
+  if (reduceMotion) return null;
 
   return (
     <motion.div

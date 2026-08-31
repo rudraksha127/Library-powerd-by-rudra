@@ -48,22 +48,22 @@ export function SecretVault() {
   };
 
   return (
-    <section className="relative w-full py-32 px-6 sm:px-8 overflow-hidden">
+    <section className="section-shell py-32">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="text-center max-w-2xl mx-auto mb-20"
+        className="section-header mb-20"
       >
-        <span className="font-body text-[10px] tracking-[0.4em] text-[var(--color-champagne-gold)]/50 uppercase mb-4 block">
+        <span className="section-eyebrow">
           Observations
         </span>
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white/85 font-normal leading-tight mb-4">
+        <h2 className="section-title mb-4">
           Little Thoughts
         </h2>
-        <p className="font-body text-[13px] text-white/30 max-w-sm mx-auto leading-relaxed font-light">
+        <p className="section-subtext max-w-sm mx-auto">
           A few genuine, friendly notes. Tap a card to read.
         </p>
       </motion.div>
@@ -73,18 +73,21 @@ export function SecretVault() {
         {thoughts.map((thought, i) => {
           const isRevealed = revealedIds.has(thought.id);
           return (
-            <motion.div
+            <motion.button
               key={thought.id}
+              type="button"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
               onClick={() => !isRevealed && reveal(thought.id)}
-              className={`relative rounded-xl p-7 cursor-pointer transition-all duration-600 min-h-[160px] flex flex-col justify-between ${
+              className={`focus-ring relative rounded-xl p-7 transition-all duration-600 min-h-[160px] flex flex-col justify-between text-left ${
                 isRevealed
                   ? "bg-white/[0.03] border border-[var(--color-champagne-gold)]/15"
                   : "bg-white/[0.015] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.03]"
               }`}
+              aria-expanded={isRevealed}
+              aria-label={isRevealed ? `Revealed: ${thought.hint}` : `Reveal note: ${thought.hint}`}
             >
               {!isRevealed ? (
                 <>
@@ -115,7 +118,7 @@ export function SecretVault() {
                   </p>
                 </motion.div>
               )}
-            </motion.div>
+            </motion.button>
           );
         })}
       </div>

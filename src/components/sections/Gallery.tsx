@@ -6,24 +6,25 @@ import galleryData from "@/data/gallery.json";
 
 export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const selectedItem = selectedImage !== null ? galleryData.find((img) => img.id === selectedImage) : null;
 
   return (
-    <section className="relative w-full py-32 px-6 sm:px-8 overflow-hidden">
+    <section className="section-shell py-32">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="text-center max-w-2xl mx-auto mb-20"
+        className="section-header mb-20"
       >
-        <span className="font-body text-[10px] tracking-[0.4em] text-[var(--color-champagne-gold)]/50 uppercase mb-4 block">
+        <span className="section-eyebrow">
           Gallery
         </span>
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-white/85 font-normal leading-tight mb-4">
+        <h2 className="section-title mb-4">
           Captured Moments
         </h2>
-        <p className="font-body text-[13px] text-white/30 max-w-md mx-auto leading-relaxed font-light">
+        <p className="section-subtext max-w-md mx-auto">
           Fragments of light and things worth remembering.
         </p>
       </motion.div>
@@ -31,14 +32,16 @@ export function Gallery() {
       {/* Grid — clean, uniform, no tilts */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {galleryData.map((item, i) => (
-          <motion.div
+          <motion.button
             key={item.id}
+            type="button"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.08 }}
-            className="group cursor-pointer"
+            className="focus-ring group text-left"
             onClick={() => setSelectedImage(item.id)}
+            aria-label={`Open image: ${item.caption}`}
           >
             <div className="aspect-[3/4] rounded-xl overflow-hidden relative">
               <img
@@ -52,7 +55,7 @@ export function Gallery() {
                 <p className="font-body text-[12px] text-white/80 tracking-wide font-light">{item.caption}</p>
               </div>
             </div>
-          </motion.div>
+          </motion.button>
         ))}
       </div>
 
@@ -76,14 +79,15 @@ export function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={galleryData.find(img => img.id === selectedImage)?.url}
-                alt=""
+                src={selectedItem?.url}
+                alt={selectedItem?.caption ?? "Selected gallery image"}
                 className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
               />
 
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer text-white/60 text-xs"
+                className="focus-ring absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors text-white/60 text-xs"
+                aria-label="Close image preview"
               >
                 ✕
               </button>

@@ -1,12 +1,18 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export function LoadingExperience({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<"intro" | "reveal" | "orbit" | "dissolve" | "done">("intro");
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reduceMotion) {
+      onComplete();
+      return;
+    }
+
     // 0s: Intro (Thought text fades in)
     const t1 = setTimeout(() => setPhase("reveal"), 1500); // 1.5s: Photo enters from bottom right
     const t2 = setTimeout(() => setPhase("orbit"), 3000);  // 3.0s: Orbit starts
@@ -22,7 +28,7 @@ export function LoadingExperience({ onComplete }: { onComplete: () => void }) {
       clearTimeout(t3);
       clearTimeout(t4);
     };
-  }, [onComplete]);
+  }, [onComplete, reduceMotion]);
 
   if (phase === "done") return null;
 
